@@ -1,0 +1,45 @@
+o 大小写敏感动态类型语言
+  即无类型语言，值隐含类型
+
+o 基本类型
+  nil
+  boolean   true/false
+  number    整数或者浮点数
+  string    字节序列
+  function  函数类型 lua可以调用lua编写的函数，c编写的函数
+  userdata  存储c的数据到lua变量中
+  thread  协程
+  table   关联数组
+
+o 关键字
+  and       break     do        else      elseif    end
+  false     for       function  goto      if        in
+  local     nil       not       or        repeat    return
+  then      true      until     while
+
+o c中访问lua虚拟机
+  lua是基于栈的解释执行机
+  luaL_newstate()生成lua虚拟机
+  /*c实现的函数可以导出供lua脚本使用，也可以c中调用*/
+  int foo(lua_State *L)
+  {
+    return 0;/*返回返回值的个数，返回值已经在上面压栈*/
+  }
+  lua_pushcfunction,lua_pushinteger等把函数或者参数压栈，调用lua_pcall执行上面的函数
+
+  lua_loadstring，lua_dofile等加载lua脚本并编译成lua字节码
+  lua_loadstring生成一个function
+  
+  lua_getglobal()将lua脚本中变量压栈
+  lua_gettop()可以访问到这个变量
+  
+  lua_rawgeti可以访问lua脚本中table的变量
+  
+  执行完lua脚本，调用lua_close()关闭lua解释器
+
+  lua栈操作
+  lua_pushxxx
+  lua_pop
+  lua_gettop
+
+  
